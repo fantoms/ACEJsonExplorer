@@ -14,14 +14,13 @@ namespace ACEJsonExplorer
         public static string RequestWorldDeployment()
         {
             Console.WriteLine("Attempting to use sync...");
-            LauncherConfig config = Program.Config;
 
             string authToken = Program.AuthToken;
             if (authToken?.Length > 0)
             {
+                RestClient cmdClient = new RestClient(Program.Config.GameApi);
                 var apiRequest = new RestRequest("/Server/RedeployWorldDatabase", Method.GET);
-                apiRequest.AddHeader("Authorization", "Bearer " + authToken);
-                RestClient cmdClient = new RestClient(config.GameApi);
+                apiRequest.AddHeader("Authorization", "Bearer " + authToken);                
                 var apiResponse = cmdClient.Execute(apiRequest);
 
                 if (apiResponse.StatusCode != System.Net.HttpStatusCode.OK)

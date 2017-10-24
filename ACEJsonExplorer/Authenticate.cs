@@ -12,15 +12,14 @@ namespace ACEJsonExplorer
     {
         public static string GetApiToken()
         {
-            LauncherConfig config = Program.Config;
-            RestClient authClient = new RestClient(config.LoginServer);
-            Console.WriteLine($"Attempting to login with {config.Username} and {config.Password}.");
+            RestClient authClient = new RestClient(Program.Config.LoginServer);
+            Console.WriteLine($"Attempting to login with {Program.Config.Username} and {Program.Config.Password}.");
 
             var authRequest = new RestRequest("/Account/Authenticate", Method.POST);
             authRequest.AddJsonBody(new
             {
-                Username = config.Username,
-                Password = config.Password
+                Username = Program.Config.Username,
+                Password = Program.Config.Password
             });
             var authResponse = authClient.Execute(authRequest);
             string authToken;
