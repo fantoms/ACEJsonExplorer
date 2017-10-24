@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace ACEJsonExplorer
 
             if (AuthToken?.Length > 0)
             {
-                Console.WriteLine(Operate.Sync());
+                Console.WriteLine(Operate.RequestWorldDeployment());
                 Console.ReadLine();
             }
             else

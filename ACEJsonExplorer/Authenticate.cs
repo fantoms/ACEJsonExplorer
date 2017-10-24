@@ -14,6 +14,8 @@ namespace ACEJsonExplorer
         {
             LauncherConfig config = Program.Config;
             RestClient authClient = new RestClient(config.LoginServer);
+            Console.WriteLine($"Attempting to login with {config.Username} and {config.Password}.");
+
             var authRequest = new RestRequest("/Account/Authenticate", Method.POST);
             authRequest.AddJsonBody(new
             {
@@ -31,10 +33,10 @@ namespace ACEJsonExplorer
                 return string.Empty;
             }
 
-            Console.WriteLine("Auth successful, retreiving subscriptions...");
+            Console.WriteLine("Auth successful, grabbing token...");
             JObject response = JObject.Parse(authResponse.Content);
             authToken = (string)response.SelectToken("authToken");
-
+            Console.WriteLine(authToken);
             if (authToken?.Length>0) { return authToken; }
 
             return string.Empty;

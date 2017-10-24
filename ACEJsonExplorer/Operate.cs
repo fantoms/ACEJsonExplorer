@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,29 @@ namespace ACEJsonExplorer
 {
     public static class Operate
     {
-        public static string Sync()
+        public static string RequestWorldDeployment()
         {
             Console.WriteLine("Attempting to use sync...");
             LauncherConfig config = Program.Config;
-            RestClient authClient = new RestClient(config.LoginServer);
 
             string authToken = Program.AuthToken;
             if (authToken?.Length > 0)
             {
-                var apiRequest = new RestRequest("/Sync/Pull", Method.POST);
+                var apiRequest = new RestRequest("/Server/RedeployWorldDatabase", Method.GET);
                 apiRequest.AddHeader("Authorization", "Bearer " + authToken);
-                var apiResponse = authClient.Execute(apiRequest);
-                
+                RestClient cmdClient = new RestClient(config.GameApi);
+                var apiResponse = cmdClient.Execute(apiRequest);
+
                 if (apiResponse.StatusCode != System.Net.HttpStatusCode.OK)
                 {
                     // show the error
                     Console.WriteLine("Error in sync request:");
-                    Console.WriteLine(apiResponse.Content);
                     return apiResponse.Content;
                 }
                 return apiResponse.Content;
             }
             return string.Empty;
         }
+        
     }
 }

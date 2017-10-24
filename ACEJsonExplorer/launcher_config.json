@@ -3,7 +3,7 @@
 	"LoginServer": "http://localhost:8001",
 	"GameServer": "127.0.0.1:9000",
 	"ClientExe": "c:\\Turbine\\Asheron's Call\\acclient.exe",
-	"Username": "fantom",
-	"Password": "test",
+	"Username": "dev",
+	"Password": "dev",
 	"ApiVersion": 1
 }
