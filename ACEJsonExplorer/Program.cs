@@ -14,7 +14,7 @@ namespace ACEJsonExplorer
 
         static void Main(string[] args)
         {
-            // Iterate through 5 test accounts ( 5 permission levels, each has a different permission)
+            // Iterate through 6 test accounts ( 6 permission levels, each account has a different permission )
             if (Config.TestAccounts?.Count > 0)
                 foreach (var account in Config.TestAccounts)
                 {
