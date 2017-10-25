@@ -1,6 +1,17 @@
 {
 	"GameApi": "http://localhost:8000",
 	"LoginServer": "http://localhost:8001",
-	"GameServer": "127.0.0.1:9000",
-	"ClientExe": "c:\Turbine\Asheron's Call\acclient.exe"
+	"GameServer": "localhost:9000",
+	"ClientExe": "c:\\Turbine\\Asheron's Call\\acclient.exe",
+  "TestAccounts": [
+      {
+        "Username": "test",
+        "Password": "test"
+      },
+      {
+        "Username": "test2",
+        "Password": "test2"
+      }
+    ],
+	"ApiVersion": 1
 }
