@@ -10,16 +10,16 @@ namespace ACEJsonExplorer
 {
     public static class Authenticate
     {
-        public static string GetApiToken()
+        public static string GetApiToken(Account account)
         {
             RestClient authClient = new RestClient(Program.Config.LoginServer);
-            Console.WriteLine($"Attempting to login with {Program.Config.Username} and {Program.Config.Password}.");
+            Console.WriteLine($"Attempting to login with {account.Username} and {account.Password}.");
 
             var authRequest = new RestRequest("/Account/Authenticate", Method.POST);
             authRequest.AddJsonBody(new
             {
-                Username = Program.Config.Username,
-                Password = Program.Config.Password
+                Username = account.Username,
+                Password = account.Password
             });
             var authResponse = authClient.Execute(authRequest);
             string authToken;
@@ -27,10 +27,12 @@ namespace ACEJsonExplorer
             if (authResponse.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 // show the error
-                Console.WriteLine("Error logging in");
-                Console.WriteLine(authResponse.Content);
+                Console.WriteLine("Error logging in: ");
+                if (authResponse.ErrorMessage?.Length > 0)
+                    Console.WriteLine(authResponse.ErrorMessage);
                 return string.Empty;
-            }
+            } else
+                Console.WriteLine(authResponse.Content);
 
             Console.WriteLine("Auth successful, grabbing token...");
             JObject response = JObject.Parse(authResponse.Content);

@@ -14,19 +14,26 @@ namespace ACEJsonExplorer
 
         static void Main(string[] args)
         {
-            try { AuthToken = Authenticate.GetApiToken();  }
-            catch (Exception error)
-            {
-                Console.WriteLine(error.Message);
-            }
+            // Iterate through 5 test accounts ( 5 permission levels, each has a different permission)
+            if (Config.TestAccounts?.Count > 0)
+                foreach (var account in Config.TestAccounts)
+                {
+                    try { AuthToken = Authenticate.GetApiToken(account); }
+                    catch (Exception error)
+                    {
+                        Console.WriteLine(error.Message);
+                    }
 
-            if (AuthToken?.Length > 0)
-            {
-                Console.WriteLine(Operate.RequestWorldDeployment());
-                Console.ReadLine();
-            }
+                    if (AuthToken?.Length > 0)
+                    {
+                        Console.WriteLine(Operate.RequestWorldDeployment());
+                    }
+                    else
+                        Console.Write("Error collecting auth token");
+                    Console.ReadLine();
+                }
             else
-                Console.Write("Error collecting auth token");
+                Console.Write("Error in test accounts.");
         }
     }
 }

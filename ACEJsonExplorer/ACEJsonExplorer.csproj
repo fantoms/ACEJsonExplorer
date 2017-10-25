@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessLevel.cs" />
+    <Compile Include="Account.cs" />
     <Compile Include="Operate.cs" />
     <Compile Include="Authenticate.cs" />
     <Compile Include="LauncherConfig.cs" />
